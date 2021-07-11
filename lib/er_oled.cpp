@@ -1,15 +1,27 @@
-/***************************************************
-//Web: http://www.buydisplay.com
-EastRising Technology Co.,LTD
-****************************************************/
+/**
+ * Arduino SPI library for ER-OLEDM024-2 display
+ * 
+ * Original author: EastRising Technology Co.,LTD
+ */
 #include <SPI.h>
 #include "er_oled.h"
 
+
+/**
+ * Function that allows to send SPI commands directly to display
+ * 
+ * List of common commands:
+ * TODO
+ */
 void command(uint8_t cmd){
     digitalWrite(OLED_DC, LOW);
     SPIWrite(&cmd, 1);
 }
 
+
+/**
+ * TODO
+ */
 void SPIWrite(uint8_t *buffer, int bufferLength) {
     int i;
     for (i = 0; i < bufferLength; i++) {
@@ -17,9 +29,11 @@ void SPIWrite(uint8_t *buffer, int bufferLength) {
     }
 }
 
+/**
+ * TODO
+ */
 void er_oled_begin()
 {
-
     pinMode(OLED_RST, OUTPUT);
     pinMode(OLED_DC, OUTPUT);
     pinMode(OLED_CS, OUTPUT);
@@ -73,6 +87,9 @@ void er_oled_begin()
     command(0xaf);//--turn on oled panel
 }
 
+/**
+ * TODO
+ */
 void er_oled_clear(uint8_t* buffer)
 {
 	int i;
@@ -82,6 +99,9 @@ void er_oled_clear(uint8_t* buffer)
 	}
 }
 
+/**
+ * TODO
+ */
 void er_oled_pixel(int x, int y, char color, uint8_t* buffer)
 {
     if(x > WIDTH || y > HEIGHT)return ;
@@ -91,6 +111,9 @@ void er_oled_pixel(int x, int y, char color, uint8_t* buffer)
         buffer[x+(y/8)*WIDTH] &= ~(1<<(y%8));
 }
 
+/**
+ * TODO
+ */
 void er_oled_char1616(uint8_t x, uint8_t y, uint8_t chChar, uint8_t* buffer)
 {
 	uint8_t i, j;
@@ -112,6 +135,9 @@ void er_oled_char1616(uint8_t x, uint8_t y, uint8_t chChar, uint8_t* buffer)
 	}
 }
 
+/**
+ * TODO
+ */
 void er_oled_char(unsigned char x, unsigned char y, char acsii, char size, char mode, uint8_t* buffer)
 {
     unsigned char i, j, y0=y;
@@ -144,6 +170,9 @@ void er_oled_char(unsigned char x, unsigned char y, char acsii, char size, char 
     }
 }
 
+/**
+ * TODO
+ */
 void er_oled_string(uint8_t x, uint8_t y, const char *pString, uint8_t Size, uint8_t Mode, uint8_t* buffer)
 {
     while (*pString != '\0') {       
@@ -161,6 +190,9 @@ void er_oled_string(uint8_t x, uint8_t y, const char *pString, uint8_t Size, uin
     }
 }
 
+/**
+ * TODO
+ */
 void er_oled_char3216(uint8_t x, uint8_t y, uint8_t chChar, uint8_t* buffer)
 {
     uint8_t i, j;
@@ -182,6 +214,9 @@ void er_oled_char3216(uint8_t x, uint8_t y, uint8_t chChar, uint8_t* buffer)
     }
 }
 
+/**
+ * TODO
+ */
 void er_oled_bitmap(uint8_t x,uint8_t y,const uint8_t *pBmp, uint8_t chWidth, uint8_t chHeight, uint8_t* buffer)
 {
 	uint8_t i, j, byteWidth = (chWidth + 7)/8;
@@ -194,6 +229,9 @@ void er_oled_bitmap(uint8_t x,uint8_t y,const uint8_t *pBmp, uint8_t chWidth, ui
 	}		
 }
 
+/**
+ * TODO
+ */
 void er_oled_display(uint8_t* pBuf)
 {    uint8_t page,i;   
     for (page = 0; page < PAGES; page++) {         
