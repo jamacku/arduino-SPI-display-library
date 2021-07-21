@@ -29,26 +29,6 @@ uint8_t oled_buf[WIDTH * HEIGHT / 8];
 
 void setup() {
   Serial.begin(9600);
-  Serial.print("OLED Example\n");
-
-  /* display an image of bitmap matrix */
-  er_oled_begin();
-  er_oled_clear(oled_buf);
-  er_oled_bitmap(0, 0, PIC1, 128, 64, oled_buf);
-  er_oled_display(oled_buf);
-  delay(3000);  
-  command(0xa7);//--set Negative display 
-  delay(3000);
-  command(0xa6);//--set normal display
-  
-  er_oled_clear(oled_buf);
-  er_oled_bitmap(0, 0, PIC2, 128, 64, oled_buf);
-  er_oled_display(oled_buf);
-  delay(3000);
-  
-  command(0xa7);//--set Negative display 
-  delay(3000); 
-  command(0xa6);//--set normal display  
   
   er_oled_clear(oled_buf);
   /* display images of bitmap matrix */
